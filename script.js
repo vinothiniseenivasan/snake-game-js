@@ -5,7 +5,9 @@ const context = gameBoard.getContext('2d');
 const width =   gameBoard.width;
 const height =  gameBoard.height;
 
+
 const scoreValue = document.getElementById("scoreValue");
+const highScoreValue = document.getElementById("highScoreValue")
 // height and width of food
 const unit = 25;
 let foodX;
@@ -16,6 +18,29 @@ let yVel = 0;
 let score =0;
 let active = true;
 let started = false;
+
+let highScore = localStorage.getItem("highScore") || 0;
+
+function updateScore()
+{
+    scoreValue.textContent = score;
+    highScoreValue.textContent = highScore;
+   
+}
+
+function updateHighscore()
+{
+    console.log("outside highscore" , score,highScore)
+    if(score > highScore)
+    {
+        console.log("inside highscore")
+        highScore=score;
+        localStorage.setItem("highScore",highScore);
+        highScoreValue.textContent = highScore;
+    }
+}
+
+
 
 
 
@@ -76,6 +101,7 @@ startGame();
 
 function startGame()
 {
+    updateHighscore();
     context.fillStyle = "#406D0F";
     // fillRect(xStart ,yStart ,width ,height)
     context.fillRect(0,0,width,height);
@@ -126,9 +152,8 @@ function moveSnake()
         // to create food
         createFood();
         score = score + 1;
-
-        // increase score
-        scoreValue.textContent = score;
+        
+        
     }
     else
     {
@@ -170,10 +195,14 @@ function nextTick()
             displayFood();
             moveSnake();
             drawSnake();
-            // checkCollision();
+            checkCollision();
+            
             checkGameOver();
+            updateScore();
+        
             
             nextTick();
+
     
         } , 200)
     
@@ -182,6 +211,8 @@ function nextTick()
 
     else{
         clearBoard(); 
+        updateScore();
+        updateHighscore();
         console.log("game over" ,active )
         context.font = "bold 50px serif";
         context.fillStyle ="white";
@@ -198,8 +229,9 @@ function checkCollision()
 {
     for(let i=1; i<snake.length;i++)
     {
-        if(snake[i].x === snake[0].x  || snake[i].y === snake[0].y)
+        if(snake[i].x === snake[0].x  && snake[i].y === snake[0].y)
         {
+            console.log("colllide")
             // snake hits body parts
             active=false;
             return;
