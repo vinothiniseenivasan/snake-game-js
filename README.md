@@ -44,7 +44,5 @@ This Snake Game allows players to control a snake on a grid. The objective is to
 
 <h3>**Screenshots**</h3>
 
-![Snake Game Screenshot]("C:\Users\97152\Desktop\snake screenshot")
-![ScreenShot](https://raw.github.com/{vinothiniseenivasan}/{snake-game-js}/{branch}/{C:\Users\97152\Desktop\snake screenshot})
 
-
+![Screenshot 2024-04-17 172132](https://github.com/vinothiniseenivasan/snake-game-js/assets/137482214/2584e99f-ac5b-4a58-9c93-adc75ebcb34f)
