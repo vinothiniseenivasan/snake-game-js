@@ -18,8 +18,22 @@ let yVel = 0;
 let score =0;
 let active = true;
 let started = false;
+// for pause game
+let paused = false;
+
+
+
+// startbtn and pausebtn
+ const startValue = document.getElementById("StartBtn");
+// sound making
+let myAudio = document.querySelector('#audio');
+
+
 
 let highScore = localStorage.getItem("highScore") || 0;
+// to start game
+const start = document.getElementById("StartBtn");
+start.addEventListener("click" ,startMove)
 
 function updateScore()
 {
@@ -52,14 +66,23 @@ let snake = [
      {x:unit*1 , y:0} ,
      {x: 0, y:0}
 ]
+function startMove()
+{
+    
+    window.addEventListener("keydown" , keyPress);
+}
 
-window.addEventListener("keydown" , keyPress);
+
 
 function keyPress(event)
 {
+    // startValue.textContent = "pause";
+
+    startValue.addEventListener("click" , pauseGame)
 
     if(!started)
     {
+        startValue.textContent = "pause";
         started = true;
         nextTick();
     }
@@ -94,9 +117,33 @@ function keyPress(event)
 
 
 }
- 
+function pauseGame()
+{
+ paused = !paused; // Toggle the paused state
+    
+    // Optionally, provide visual feedback indicating that the game is paused
+    if (paused) {
+        startValue.textContent = "start";
+        // paused=false;
+        // haltSnake
+        active = false;
+       
+    } 
+    else {
+        console.log("pausegame" , paused)
+        startValue.textContent = "pause";
+        // paused = true;
+        active=true;
+        // Resume the game
+        nextTick(); // Restart the game loop
+        // paused = !paused;
+    }
+   // paused = !paused; 
+}
 
-startGame();
+
+
+ startGame();
 
 
 function startGame()
@@ -149,8 +196,14 @@ function moveSnake()
     // snake increases height
     if(snake[0].x  === foodX  && snake[0].y === foodY)
     {
+        myAudio.currentTime = 0;
+       
+            myAudio.play()
         // to create food
         createFood();
+        
+          
+        
         score = score + 1;
         
         
@@ -209,7 +262,7 @@ function nextTick()
 
     }
 
-    else{
+    else if(active === false && paused !== true){
         clearBoard(); 
         updateScore();
         updateHighscore();
@@ -218,6 +271,7 @@ function nextTick()
         context.fillStyle ="white";
         context.textAlign = "center";
         context.fillText("Game Over!!" , width/2 ,height/2);
+        // active=true;
     }
       
     

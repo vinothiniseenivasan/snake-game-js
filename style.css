@@ -30,3 +30,19 @@ h2{
     color: rgb(136, 3, 3);
 
 }
+#StartBtn {
+    border: 1px solid rgb(9, 62, 9);
+    background-color: rgba(172, 255, 47, 0.136);
+    margin-bottom: 20px;
+    padding: 5px;
+    border-radius: 10px;
+    color: black;
+    cursor: pointer;
+    transition: transform 0.3s; /* Add transition for smooth size change */
+  }
+  
+  /* When hovered, increase the size */
+  #StartBtn:hover {
+    background-color: rgb(23, 100, 24);
+    transform: scale(1.1); /* Scale up by 10% */
+  }
