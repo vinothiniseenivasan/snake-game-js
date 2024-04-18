@@ -46,3 +46,6 @@ This Snake Game allows players to control a snake on a grid. The objective is to
 
 
 ![image](https://github.com/vinothiniseenivasan/snake-game-js/assets/137482214/eae59e99-f075-4f16-98c1-4d51fd83c39d)
+<h3>**Demo**</h3>
+You can play the live version of the game [here](https://snakegame-js-project.vercel.app).
+
